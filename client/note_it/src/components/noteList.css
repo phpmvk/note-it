@@ -1,0 +1,7 @@
+.noteList {
+  border-radius: 0 0 0 10px;
+  border: 1px solid #000;
+  border-color: red;
+  flex: 1;
+  background-color: hsla(196, 61%, 82%, 1);
+}

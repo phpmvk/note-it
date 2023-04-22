@@ -1,0 +1,8 @@
+.noteView {
+  border-radius: 0 0 0 10px;
+  border: 1px solid #000;
+  border-color: red;
+  flex: 4;
+  background-color: hsla(197, 60%, 94%, 1);
+  color: #000;
+}
