@@ -4,9 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
-// import { getNotes } from './api.service';
-// import { useEffect } from 'react';
-// import { useState } from 'react';
+
 import React from 'react';
 import { NotesProvider } from './notesContext';
 
@@ -32,12 +30,5 @@ function App() {
     </div>
   );
 }
-
-// StyleSheet.create({
-//   * {
-//     margin: 0;
-//     padding: 0;
-//     box-sizing: border-box;
-//   },
 
 export default App;

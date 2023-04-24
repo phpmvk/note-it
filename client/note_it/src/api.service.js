@@ -59,18 +59,3 @@ export const getUserNote = id => {
 // GET /notes/:id(read a note)
 // PUT /notes/:id(update a note)
 // DELETE /notes/:id( delete a note)
-
-// Path: client/note_it/src/App.js
-// import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import './App.css';
-// import {
-//   getNotes,
-//   createNote,
-//   deleteNote,
-//   updateNote,
-//   getNote,
-// } from './api.service';
-// import NoteList from './components/NoteList';
-// import NoteForm from './components/NoteForm';
-// import Note from './components/Note';

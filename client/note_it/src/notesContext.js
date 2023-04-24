@@ -18,14 +18,6 @@ export const NotesProvider = ({ children }) => {
     refreshNotes();
   }, []);
 
-  // useEffect(() => {
-  //   if (notes.length > 0) {
-  //     setNote(notes[0]);
-  //   }
-
-  //   console.log('notes', notes);
-  // }, [notes]);
-
   const refreshNotes = async () => {
     let allNotes = await getNotes().then(data => {
       console.log('data', data);

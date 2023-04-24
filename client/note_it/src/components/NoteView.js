@@ -8,9 +8,6 @@ import { useDebouncedCallback } from 'use-debounce';
 
 export const NoteView = () => {
   const { notes, refreshNotes, note, setNote } = useNotes();
-  // const [note, setNote] = useState({ title: '', body: '' });
-  // const [title, setTitle] = useState('');
-  // const [body, setBody] = useState('');
 
   useEffect(() => {
     if (notes.length > 0) {
@@ -19,16 +16,6 @@ export const NoteView = () => {
 
     console.log('notes', notes);
   }, [notes]);
-
-  // const changeNote = note => {
-  //   setNote(note);
-  // };
-
-  // useEffect(() => {
-  //   console.log('note', note);
-  //   setBody(note.body);
-  //   setTitle(note.title);
-  // }, [note]);
 
   const debouncedBody = async value => {
     console.log('value', value);
