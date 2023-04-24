@@ -1,8 +1,14 @@
 .noteView {
   border-radius: 0 0 0 10px;
-  border: 1px solid #000;
-  border-color: red;
+  /* border: 1px solid #000; */
+  /* border-color: red; */
   flex: 4;
-  background-color: hsla(197, 60%, 94%, 1);
+  background-color: #f5f5f5;
   color: #000;
+}
+.ql-editor {
+  min-height: 700px;
+}
+.ql-container {
+  min-height: 700px;
 }

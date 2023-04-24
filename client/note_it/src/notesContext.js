@@ -1,9 +1,9 @@
 import {
   getNotes,
-  // createNote,
-  // deleteNote,
+  createNote,
+  deleteNote,
   updateNote,
-  // getNote,
+  getNote,
 } from './api.service';
 
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -12,9 +12,19 @@ const NotesContext = createContext();
 
 export const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
+  const [note, setNote] = useState({});
+
   useEffect(() => {
     refreshNotes();
   }, []);
+
+  // useEffect(() => {
+  //   if (notes.length > 0) {
+  //     setNote(notes[0]);
+  //   }
+
+  //   console.log('notes', notes);
+  // }, [notes]);
 
   const refreshNotes = async () => {
     let allNotes = await getNotes().then(data => {
@@ -26,10 +36,11 @@ export const NotesProvider = ({ children }) => {
     });
 
     setNotes(allNotes);
-    console.log('notes', allNotes);
+    setNote(allNotes[0]);
+    console.log('notes', note);
   };
   return (
-    <NotesContext.Provider value={{ notes, refreshNotes }}>
+    <NotesContext.Provider value={{ notes, refreshNotes, note, setNote }}>
       {children}
     </NotesContext.Provider>
   );

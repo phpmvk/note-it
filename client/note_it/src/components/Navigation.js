@@ -5,27 +5,38 @@ import './navigation.css';
 
 export const Navigation = () => {
   return (
-    <NavigationStyled>
-      <h1>Navigation</h1>
+    <div className='navigation border-2 border-opacity-50 border-rounded-box shadow-sm'>
       <div className='nav-items'>
-        <div>
-          <img src='' alt='' />
+        <div className='flex flex-row justify-center'>
+          <div className='avatar'>
+            <div className='pr-2'>
+              <img
+                src='profile.jpeg'
+                alt='avatar'
+                className='w-24 rounded-full shadow-lg'
+              />
+            </div>
+          </div>
           <span>Tarik</span>
-
-          <FaChevronDown />
         </div>
+        <FaChevronDown />
       </div>
-    </NavigationStyled>
+    </div>
   );
 };
 
 const NavigationStyled = styled.div`
-  background-color: hsla(196, 62%, 58%, 1);
-  color: #fff;
+  color: black;
   flex: 2;
   height: 100%;
   max-width: 300px;
   border-radius: 0 0 0 10px;
-  border: 1px solid #000;
-  border-color: red;
+  shadow: 0 0 10px 0 gray;
+
+  // border: 1px solid #000;
+  // border-color: red;
+  padding-top: 55px;
+  padding-left: 20px;
+  margin-left: 15px;
+  background-color: #f5f5f5;
 `;

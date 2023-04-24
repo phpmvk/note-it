@@ -1,0 +1,19 @@
+.navigation {
+  color: black;
+  flex: 2;
+  height: 100%;
+  max-width: 300px;
+  border-radius: 0 0 0 10px;
+  box-shadow: 1px solid #323232;
+
+  /* // border: 1px solid #000;
+  // border-color: red; */
+  padding-top: 55px;
+  padding-left: 20px;
+  margin-left: 15px;
+  background-color: #f5f5f5;
+}
+img {
+  max-width: 60px;
+  max-height: 60px;
+}

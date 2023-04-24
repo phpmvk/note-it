@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3001';
 
 export const getNotes = () => {
-  console.log('hello from getNotes');
+  // console.log('hello from getNotes');
   return fetch(baseUrl + '/notes', {
     method: 'GET',
     headers: {
@@ -13,6 +13,7 @@ export const getNotes = () => {
 };
 
 export const createNote = note => {
+  console.log('i am the note inside the createnote', note);
   return fetch(`${baseUrl}/notes`, {
     method: 'POST',
     headers: {
@@ -22,8 +23,9 @@ export const createNote = note => {
   }).then(res => res.json());
 };
 
-export const deleteNote = id => {
-  return fetch(`${baseUrl}/notes/${id}`, {
+export const deleteNote = note => {
+  console.log('i am the note inside the deletenote', note._id);
+  return fetch(`${baseUrl}/notes/${note._id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -31,8 +33,9 @@ export const deleteNote = id => {
   }).then(res => res.json());
 };
 
-export const updateNote = (id, note) => {
-  return fetch(`${baseUrl}/notes/${id}`, {
+export const updateNote = note => {
+  console.log('i am the note inside the updatenote', note);
+  return fetch(`${baseUrl}/notes/${note._id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +44,7 @@ export const updateNote = (id, note) => {
   }).then(res => res.json());
 };
 
-export const getNote = id => {
+export const getUserNote = id => {
   return fetch(`${baseUrl}/notes/${id}`, {
     method: 'GET',
     headers: {

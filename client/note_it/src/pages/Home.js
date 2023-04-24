@@ -9,7 +9,7 @@ import { NotesContext } from '../App';
 export const Home = () => {
   return (
     <>
-      <container className='container'>
+      <container className='container h-4/5 pt-10'>
         {/* <NotesContext.Consumer> */}
         <NoteView />
         {/* </NotesContext.Consumer> */}

@@ -15,9 +15,9 @@ export const NotesContext = React.createContext();
 function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
+      <header className='App-header h-full'>
         <nav className='App-navbar my-5'>
-          <h1 className='text-3xl font-bold underline'>Notes App</h1>
+          <img src='logo.png' className='h-24 w-24' alt='logo' />
         </nav>
         <NotesProvider>
           <Router>
