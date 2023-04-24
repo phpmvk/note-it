@@ -7,14 +7,15 @@ export const NoteList = () => {
   const { notes, refreshNotes, note, setNote } = useNotes();
   console.log('notes', notes);
   const addNote = async () => {
-    let note = {
+    let newNote = {
       title: '',
       body: '',
       notebook: [],
       user: '',
       date: new Date(),
     };
-    await createNote(note);
+    changeNote(newNote);
+    await createNote(newNote);
     await refreshNotes();
   };
   const changeNote = note => {
@@ -30,7 +31,7 @@ export const NoteList = () => {
 
   return (
     <>
-      <div className='noteList  pl-3 '>
+      <div className='noteList  ml-3 pt-12 border-2 border-opacity-50 border-rounded-box shadow-sm'>
         <div className='grid h-20 card mt-0 mb-0 rounded-box place-items-center border-2 border-opacity-50 border-rounded-box shadow-sm rounded-sm bg-gradient-to-r from-blue-500 to-blue-550 hover:from-blue-600 hover:to-blue-700'>
           <button className='btn btn-primary ' onClick={addNote}>
             Add Note

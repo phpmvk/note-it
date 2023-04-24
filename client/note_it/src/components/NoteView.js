@@ -39,12 +39,13 @@ export const NoteView = () => {
   const updateDb = useDebouncedCallback(note => {
     console.log('note', note);
     updateNote(note);
-  }, 1000);
+    refreshNotes();
+  }, 3000);
   //delete note on click function
-  const handleDeleteNote = () => {
+  const handleDeleteNote = async () => {
     console.log('note', note);
     console.log('delete note');
-    deleteNote(note);
+    await deleteNote(note);
     refreshNotes();
   };
 
@@ -86,7 +87,7 @@ export const NoteView = () => {
     <div className='noteView relative'>
       <div className='noteView__header '>
         <input
-          className='noteView__title py-10 px-10 w-full text-2xl font-bold outline-none bg-slate-100 border-2 border-opacity-30 border-rounded-box shadow-sm'
+          className='noteView__title mb-4 py-10 px-10 w-full text-2xl font-bold outline-none bg-neutral-100 border-2 border-opacity-30 border-rounded-box shadow-sm'
           type='text'
           value={note.title}
           onChange={debouncedTitle}

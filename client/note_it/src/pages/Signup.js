@@ -70,7 +70,10 @@ export const Signup = () => {
             </div>
 
             <div className='flex items-center mt-4'>
-              <button className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transfor  bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700'>
+              <button
+                className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transfor  bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700'
+                onClick={() => navigate('/login')}
+              >
                 Register
               </button>
             </div>

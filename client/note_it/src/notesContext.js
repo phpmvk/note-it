@@ -13,12 +13,14 @@ const NotesContext = createContext();
 export const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState({});
+  const [notebooks, setNotebooks] = useState([]);
 
   useEffect(() => {
     refreshNotes();
   }, []);
 
   const refreshNotes = async () => {
+    console.log('refreshing  notes');
     let allNotes = await getNotes().then(data => {
       console.log('data', data);
       let result = data.sort((a, b) => {
@@ -31,8 +33,26 @@ export const NotesProvider = ({ children }) => {
     setNote(allNotes[0]);
     console.log('notes', note);
   };
+  const searchNotes = async search => {
+    console.log('searchNotes value', search);
+    if (search !== '') {
+      let notes = await getNotes();
+      console.log('searching notes');
+
+      setNotes(
+        notes.filter(
+          note => note.body.includes(search) || note.title.includes(search)
+        )
+      );
+      setNote(notes[0]);
+    } else {
+      refreshNotes();
+    }
+  };
   return (
-    <NotesContext.Provider value={{ notes, refreshNotes, note, setNote }}>
+    <NotesContext.Provider
+      value={{ notes, refreshNotes, note, setNote, searchNotes }}
+    >
       {children}
     </NotesContext.Provider>
   );
