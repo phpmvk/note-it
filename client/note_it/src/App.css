@@ -17,6 +17,11 @@
   margin-bottom: 0px;
 }
 
+.logo {
+  height: 95px;
+  width: 95px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

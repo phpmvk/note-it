@@ -15,7 +15,7 @@ function App() {
     <div className='App'>
       <header className='App-header h-full'>
         <nav className='App-navbar my-5'>
-          <img src='logo.png' className='h-24 w-24' alt='logo' />
+          <img src='logo.png' className='logo' alt='logo' />
         </nav>
         <NotesProvider>
           <Router>

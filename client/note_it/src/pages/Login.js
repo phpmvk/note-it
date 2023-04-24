@@ -1,8 +1,10 @@
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+  const navigate = useNavigate();
   const onFinish = values => {
     console.log('Received values of form: ', values);
   };
@@ -59,11 +61,20 @@ export const Login = () => {
           <Button
             type='primary'
             htmlType='submit'
-            className='login-form-button bg-cyan-700'
+            onClick={() => navigate('/home')}
+            className='login-form-button bg-blue-600 mr-2'
           >
             Log in
           </Button>
-          Or <a href=''>register now!</a>
+
+          <Button
+            type='primary'
+            htmlType='submit'
+            onClick={() => navigate('/signup')}
+            className='login-form-button bg-blue-600 ml-2'
+          >
+            Register now!
+          </Button>
         </Form.Item>
       </Form>
     </div>

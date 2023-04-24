@@ -107,7 +107,7 @@ export const NoteView = () => {
         {/* delete note button */}
         <button
           type='button'
-          class='bg-gradient-to-r from-red-600 to-red-700 hover:from-pink-500 hover:to-yellow-500 ... mt-2 px-4 py-2 rounded-md text-white font-bold absolute bottom-6 right-10'
+          class='bg-gradient-to-r from-red-600 to-red-650 hover:from-red-650 hover:to-red-700 ... mt-2 px-4 py-2 rounded-md text-black  absolute bottom-6 right-10'
           onClick={handleDeleteNote}
         >
           Delete Note
