@@ -12,6 +12,15 @@ export const NoteView = () => {
   useEffect(() => {
     if (notes.length > 0) {
       setNote(notes[0]);
+    } else {
+      setNote({
+        title: '',
+        body: '',
+        date: '',
+        id: '',
+        notebook: [],
+        favorite: false,
+      });
     }
 
     console.log('notes', notes);

@@ -13,7 +13,7 @@ const NotesContext = createContext();
 export const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState({});
-  const [notebooks, setNotebooks] = useState([]);
+  const [noteBooks, setNoteBooks] = useState(true);
 
   useEffect(() => {
     refreshNotes();
@@ -51,7 +51,15 @@ export const NotesProvider = ({ children }) => {
   };
   return (
     <NotesContext.Provider
-      value={{ notes, refreshNotes, note, setNote, searchNotes }}
+      value={{
+        notes,
+        refreshNotes,
+        note,
+        setNote,
+        searchNotes,
+        noteBooks,
+        setNoteBooks,
+      }}
     >
       {children}
     </NotesContext.Provider>

@@ -14,11 +14,15 @@ const noteSchema = new mongoose.Schema({
     required: true,
   },
   notebook: {
-    type: [Number],
+    type: [String],
     // required: true,
   },
   user: {
     type: Number,
+    // required: true,
+  },
+  favorite: {
+    type: Boolean,
     // required: true,
   },
 });

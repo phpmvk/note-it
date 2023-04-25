@@ -13,6 +13,7 @@ export const NoteList = () => {
       notebook: [],
       user: '',
       date: new Date(),
+      favorite: false,
     };
     changeNote(newNote);
     await createNote(newNote);

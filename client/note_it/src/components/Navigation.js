@@ -3,10 +3,11 @@ import React from 'react';
 import './navigation.css';
 import { useNavigate } from 'react-router-dom';
 import { useNotes } from '../notesContext';
+import { NotebooksList } from './NotebooksList';
 
 export const Navigation = () => {
   const navigate = useNavigate();
-  const { searchNotes } = useNotes();
+  const { searchNotes, noteBooks, setNoteBooks } = useNotes();
   const handleSearch = value => {
     console.log(value.target.value);
     searchNotes(value.target.value);
@@ -36,7 +37,11 @@ export const Navigation = () => {
         <button className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center  border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '>
           Favorites
         </button>
-        <button className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '>
+
+        <button
+          className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
+          onClick={() => setNoteBooks(!noteBooks)}
+        >
           Notebooks
         </button>
         <button

@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { Notebooks } from './pages/Notebooks';
 import { Signup } from './pages/Signup';
 
 import React from 'react';
@@ -23,9 +24,15 @@ function App() {
               <Route path='/home' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
+              <Route path='/notebooks' element={<Notebooks />} />
             </Routes>
           </Router>
         </NotesProvider>
+        <footer class='footer footer-center p-8 bg-base-300 text-base-content text-sm '>
+          <div>
+            <p>Copyright © 2023 - All right reserved by Tarik Ltd</p>
+          </div>
+        </footer>
       </header>
     </div>
   );
