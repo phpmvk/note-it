@@ -1,7 +1,6 @@
 const baseUrl = 'http://localhost:3001';
 
 export const getNotes = () => {
-  // console.log('hello from getNotes');
   return fetch(baseUrl + '/notes', {
     method: 'GET',
     headers: {
@@ -20,7 +19,9 @@ export const createNote = note => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  }).then(res => res.json());
+  }).then(res => {
+    return res.json();
+  });
 };
 
 export const deleteNote = note => {
@@ -41,15 +42,6 @@ export const updateNote = note => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  }).then(res => res.json());
-};
-
-export const getUserNote = id => {
-  return fetch(`${baseUrl}/notes/${id}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
   }).then(res => res.json());
 };
 

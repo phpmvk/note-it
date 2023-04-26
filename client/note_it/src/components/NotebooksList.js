@@ -2,11 +2,34 @@ import React from 'react';
 import { useNotes } from '../notesContext';
 import { Fragment } from 'react';
 import './noteView.css';
-// import { Menu, Transition } from '@headlessui/react';
-// import { ChevronDownIcon } from '@heroicons/react/solid';
 
 export const NotebooksList = () => {
-  const { notes, setNotes, notebooks } = useNotes();
+  const { notes, setNoteList, setNoteBooks } = useNotes();
+  // getting the notebooks in sorted order
+  function getNotebooks() {
+    const notebooksArray = [];
+    for (let i = 0; i < notes.length; i++) {
+      if (!notebooksArray.includes(notes[i].notebook)) {
+        notebooksArray.push(notes[i].notebook);
+      }
+    }
+    return notebooksArray;
+  }
+
+  let notebooks = getNotebooks().sort();
+
+  //filtering the notes by notebook
+
+  const filterNotes = async notebook => {
+    setNoteBooks(false);
+    console.log('notebook', notebook);
+
+    const filteredNotes = await notes.filter(note => {
+      return note.notebook === notebook;
+    });
+    console.log('filteredNotes', filteredNotes);
+    setNoteList(filteredNotes);
+  };
 
   return (
     <div className='noteView relative'>
@@ -15,14 +38,18 @@ export const NotebooksList = () => {
           <div>Notebooks</div>
           <div className='divider my-5'></div>
 
-          {notes.map(note => {
+          {notebooks.map(notebook => {
             return (
               <>
-                <div className='grid h-20 card bg-base-300 w-full  hover:bg-gray-300 mb-3 rounded-box place-items-center border-2 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden'>
-                  {note.notebook}
+                <button
+                  key={notebook.id}
+                  className='grid h-20 card bg-base-300 w-full pt-2  hover:bg-gray-300 mb-3 rounded-box place-items-center border-2 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden'
+                  onClick={() => filterNotes(notebook)}
+                >
+                  {notebook}
 
                   <div className='divider'></div>
-                </div>
+                </button>
               </>
             );
           })}

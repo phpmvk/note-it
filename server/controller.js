@@ -44,12 +44,12 @@ const updateNote = async (req, res) => {
 
   try {
     const note = await Note.findById(req.params.id);
-    console.log('note in the controller', note);
     note.title = req.body.title;
     note.body = req.body.body;
     note.date = req.body.date;
     note.notebook = req.body.notebook;
     note.user = req.body.user;
+    note.favorite = req.body.favorite;
     console.log('note in the controller after change', note);
     await note.save();
     res.status(200).json(note);

@@ -1,9 +1,9 @@
 import {
   getNotes,
-  createNote,
-  deleteNote,
-  updateNote,
-  getNote,
+  // createNote,
+  // deleteNote,
+  // updateNote,
+  // getNote,
 } from './api.service';
 
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -14,7 +14,8 @@ export const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState({});
   const [noteBooks, setNoteBooks] = useState(true);
-
+  const [noteList, setNoteList] = useState([{}]);
+  //refresh notes
   useEffect(() => {
     refreshNotes();
   }, []);
@@ -30,16 +31,18 @@ export const NotesProvider = ({ children }) => {
     });
 
     setNotes(allNotes);
+    setNoteList(allNotes);
     setNote(allNotes[0]);
-    console.log('notes', note);
+    // console.log('notes', note);
   };
+  //search notes
   const searchNotes = async search => {
     console.log('searchNotes value', search);
     if (search !== '') {
       let notes = await getNotes();
       console.log('searching notes');
 
-      setNotes(
+      setNoteList(
         notes.filter(
           note => note.body.includes(search) || note.title.includes(search)
         )
@@ -59,6 +62,9 @@ export const NotesProvider = ({ children }) => {
         searchNotes,
         noteBooks,
         setNoteBooks,
+        setNotes,
+        noteList,
+        setNoteList,
       }}
     >
       {children}

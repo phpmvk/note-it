@@ -1,17 +1,39 @@
 import React from 'react';
-// import { FaChevronDown } from 'react-icons/fa';
 import './navigation.css';
 import { useNavigate } from 'react-router-dom';
 import { useNotes } from '../notesContext';
-import { NotebooksList } from './NotebooksList';
+// import { NotebooksList } from './NotebooksList';
 
 export const Navigation = () => {
   const navigate = useNavigate();
-  const { searchNotes, noteBooks, setNoteBooks } = useNotes();
+  const {
+    searchNotes,
+    noteBooks,
+    setNoteBooks,
+    refreshNotes,
+    setNoteList,
+    notes,
+    setNote,
+  } = useNotes();
   const handleSearch = value => {
     console.log(value.target.value);
     searchNotes(value.target.value);
     console.log('search');
+  };
+  const showAllNotes = () => {
+    setNoteBooks(false);
+    // setNoteList(notes);
+    refreshNotes();
+  };
+  const showFavoriteNotes = async () => {
+    await refreshNotes();
+    setNoteBooks(false);
+
+    let favoriteNotes = notes.filter(note => note.favorite === true);
+
+    console.log('favoriteNotes', favoriteNotes);
+    setNote(favoriteNotes[0]);
+    setNoteList(favoriteNotes);
   };
   return (
     <div className=' navigation border-2 border-opacity-50 border-rounded-box shadow-sm'>
@@ -22,7 +44,7 @@ export const Navigation = () => {
           placeholder='Search'
           onKeyUp={e => handleSearch(e)}
         />
-        <div className=' grid-h 30 flex flex-row justify-center justify-items-start my-4 '>
+        <div className=' grid-h 40 flex flex-row justify-center justify-items-start my-7 '>
           <div className='avatar'>
             <div className=' pr-4'>
               <img
@@ -34,18 +56,27 @@ export const Navigation = () => {
           </div>
           <span>Tarik</span>
         </div>
-        <button className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center  border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '>
+        <button
+          className='grid-h40 w-full card pb-2   hover:bg-gray-300    rounded-box place-items-center  border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
+          onClick={showFavoriteNotes}
+        >
           Favorites
         </button>
 
         <button
-          className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
+          className='grid-h40 w-full card pb-2  hover:bg-gray-300    rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
+          onClick={() => setNoteBooks(showAllNotes)}
+        >
+          Show all notes
+        </button>
+        <button
+          className='grid-h40 w-full card pb-2  hover:bg-gray-300    rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
           onClick={() => setNoteBooks(!noteBooks)}
         >
           Notebooks
         </button>
         <button
-          className='grid-h30 w-full card my-š  hover:bg-gray-300   mb-4 rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
+          className='grid-h40 w-full card pb-2 hover:bg-gray-300     rounded-box place-items-center border-1 border-opacity-50  border-rounded-box shadow-sm rounded-md overflow-hidden '
           onClick={() => navigate('/login')}
         >
           Logout

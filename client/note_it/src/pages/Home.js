@@ -12,13 +12,13 @@ export const Home = () => {
   const { noteBooks } = useNotes();
   return (
     <>
-      <container className='container h-4/5 pt-10'>
+      <div className='container h-4/5 pt-10'>
         {/* <NotesContext.Consumer> */}
         {noteBooks ? <NotebooksList /> : <NoteView />}
         {/* </NotesContext.Consumer> */}
         <NoteList />
         <Navigation />
-      </container>
+      </div>
     </>
   );
 };
