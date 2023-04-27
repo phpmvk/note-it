@@ -11,10 +11,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(router);
 
-// app.get('/', async (req, res) => {
-//   return res.json({ message: 'Hello, World ✌️' });
-// });
-
 const start = async () => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017');

@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('../routes/router');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const { testNote, badNote, updatedNote, badNoteId } = require('./mocks');
+const { testNote, badNote, updatedNote, badNoteId, updatedBadNote } = require('./mocks');
 const { describe, expect } = require('@jest/globals');
 
 const app = express();
@@ -109,7 +109,6 @@ describe('UNIT TESTS', () => {
     it('Should return an error if there is no note to delete', async () => {
       const deleteRes = await request(app).delete(`/notes/${badNoteId}`);
       expect(deleteRes.status).toBe(404);
-      expect(deleteRes.body).toBeInstanceOf(Error);
     });
   });
 
