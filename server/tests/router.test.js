@@ -89,12 +89,11 @@ describe('UNIT TESTS', () => {
     });
 
     it('Should return an error if there is no note to delete', async () => {
-      const postRes = await request(app).post('/notes').send(testNote);
       const noteId = '644a8733053e3ea701f15c97';
 
       const deleteRes = await request(app).delete(`/notes/${noteId}`);
-      expect(deleteRes.status).toBe(500);
-      expect(typeof deleteRes.body).toBe(Error);
+      expect(deleteRes.status).toBe(404);
+      expect(deleteRes.body).toBeInstanceOf(Error);
     });
   });
 });
