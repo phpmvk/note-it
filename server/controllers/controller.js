@@ -1,6 +1,6 @@
 const Note = require('../models/model');
 
-const getNotes = async (req, res) => {
+const getAllNotes = async (req, res) => {
   try {
     const notes = await Note.find();
     res.status(200).json(notes);
@@ -73,7 +73,7 @@ const deleteNote = async (req, res) => {
 };
 
 module.exports = {
-  getNotes,
+  getAllNotes,
   createNote,
   getNote,
   updateNote,

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('../controllers/controller');
 
-router.get('/notes', controller.getNotes);
+router.get('/notes', controller.getAllNotes);
 router.post('/notes', controller.createNote);
 
 router.get('/notes/:id', controller.getNote);
