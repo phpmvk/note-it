@@ -13,5 +13,13 @@ module.exports = {
     notebook: 'bad notebook',
     user: 1,
     favorite: false,
-  }
-}
+  },
+  updatedNote: {
+    title: 'Updated title',
+    body: 'Updated body',
+    date: new Date(),
+    notebook: 'Updated notebook',
+    user: 2,
+    favorite: true,
+  },
+};

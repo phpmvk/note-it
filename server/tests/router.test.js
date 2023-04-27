@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('../routes/router');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const { testNote, badNote }= require('./mocks');
+const { testNote, badNote, updatedNote } = require('./mocks');
 const { describe, expect } = require('@jest/globals');
 
 const app = express();
@@ -15,7 +15,10 @@ let mongoServer;
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
-  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 });
 
 afterAll(async () => {
@@ -24,7 +27,6 @@ afterAll(async () => {
 });
 
 describe('UNIT TESTS', () => {
-
   describe('GET /notes', () => {
     it('should return a list of notes', async () => {
       const res = await request(app).get('/notes');
@@ -34,7 +36,7 @@ describe('UNIT TESTS', () => {
     it('should return an array', async () => {
       const res = await request(app).get('/notes');
       expect(Array.isArray(res.body)).toBe(true);
-    })
+    });
   });
 
   describe('POST /notes', () => {
@@ -44,20 +46,17 @@ describe('UNIT TESTS', () => {
       expect(res.body.title).toBe(testNote.title);
     });
 
-    it('should return an error when there is no date property', async ()=> {
+    it('should return an error when there is no date property', async () => {
       const res = await request(app).post('/notes').send(badNote);
-      expect(res.status).toBe(500)
-    })
-
+      expect(res.status).toBe(500);
+    });
   });
 
-  // Add similar test cases for other routes, i.e., getNote, updateNote, and deleteNote
   describe('GET /notes/:id', () => {
     it('should return a note with a specific id', async () => {
       const postRes = await request(app).post('/notes').send(testNote);
       const noteId = postRes.body._id;
 
-      // Retrieve the created note
       const getRes = await request(app).get(`/notes/${noteId}`);
       expect(getRes.status).toBe(200);
       expect(getRes.body.title).toBe(testNote.title);
@@ -68,16 +67,10 @@ describe('UNIT TESTS', () => {
     it('should update a note with a specific id and return the updated note', async () => {
       const postRes = await request(app).post('/notes').send(testNote);
       const noteId = postRes.body._id;
-      // Update the created note
-      const updatedNote = {
-        title: 'Updated title',
-        body: 'Updated body',
-        date: new Date(),
-        notebook: 'Updated notebook',
-        user: 2,
-        favorite: true,
-      };
-      const putRes = await request(app).put(`/notes/${noteId}`).send(updatedNote);
+
+      const putRes = await request(app)
+        .put(`/notes/${noteId}`)
+        .send(updatedNote);
       expect(putRes.status).toBe(200);
       expect(putRes.body.title).toBe(updatedNote.title);
       expect(putRes.body.body).toBe(updatedNote.body);
@@ -94,19 +87,22 @@ describe('UNIT TESTS', () => {
       expect(deleteRes.status).toBe(200);
       expect(deleteRes.body.title).toBe(testNote.title);
     });
-  });
 
-})
+    it('Should return an error if there is no note to delete', async () => {
+      const postRes = await request(app).post('/notes').send(testNote);
+      const noteId = '644a8733053e3ea701f15c97';
+
+      const deleteRes = await request(app).delete(`/notes/${noteId}`);
+      expect(deleteRes.status).toBe(500);
+      expect(typeof deleteRes.body).toBe(Error);
+    });
+  });
+});
 
 describe('INTEGRATION TESTS', () => {
-  
   it('should retrieve posted note from DB', async () => {
     await request(app).post('/notes').send(testNote);
-    const res = await request(app).get('/notes')
+    const res = await request(app).get('/notes');
     expect(res.body[0].title).toBe(testNote.title);
-  })
-  
-  
-
-
-})
+  });
+});
