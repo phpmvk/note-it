@@ -1,4 +1,4 @@
-const Note = require('./model.js');
+const Note = require('../models/model');
 
 const getNotes = async (req, res) => {
   console.log('getnotes called in the controller');

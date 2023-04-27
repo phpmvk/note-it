@@ -1,5 +1,5 @@
 const express = require('express');
-const router = require('./router');
+const router = require('./routes/router');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -26,3 +26,5 @@ const start = async () => {
 };
 
 start();
+
+module.exports(app);
