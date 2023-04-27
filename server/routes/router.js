@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const controller = require('../controllers/controller');
 
-router.post('/notes', controller.createNote);
 router.get('/notes', controller.getNotes);
+router.post('/notes', controller.createNote);
+
 router.get('/notes/:id', controller.getNote);
 router.put('/notes/:id', controller.updateNote);
 router.delete('/notes/:id', controller.deleteNote);
-router.all('*', (req, res) => {
-  console.log('-----------------------hi-----------------------')
+
+router.all('*', (_, res) => {
   res.status(302).redirect('/')
 })
 

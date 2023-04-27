@@ -100,7 +100,6 @@ describe('UNIT TESTS', () => {
       const postRes = await request(app).post('/notes').send(testNote);
       const noteId = postRes.body._id;
 
-      // Delete the created note
       const deleteRes = await request(app).delete(`/notes/${noteId}`);
       expect(deleteRes.status).toBe(200);
       expect(deleteRes.body.title).toBe(testNote.title);
@@ -131,7 +130,6 @@ describe('INTEGRATION TESTS', () => {
     const postRes = await request(app).post('/notes').send(testNote);
     const noteId = postRes.body._id;
 
-    // Delete the created note
     const deleteRes = await request(app).delete(`/notes/${noteId}`);
     expect(deleteRes.status).toBe(200);
     expect(deleteRes.body.title).toBe(testNote.title);

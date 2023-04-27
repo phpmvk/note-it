@@ -7,9 +7,9 @@ const app = express();
 
 const PORT = 3001;
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(router);
+app.use(cors())
+  .use(bodyParser.json())
+  .use(router);
 
 const start = async () => {
   try {
