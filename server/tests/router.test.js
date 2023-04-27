@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('../routes/router');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const { testNote, badNote, updatedNote } = require('./mocks');
+const { testNote, badNote, updatedNote, badNoteId } = require('./mocks');
 const { describe, expect } = require('@jest/globals');
 
 const app = express();
@@ -61,6 +61,10 @@ describe('UNIT TESTS', () => {
       expect(getRes.status).toBe(200);
       expect(getRes.body.title).toBe(testNote.title);
     });
+    it('should return an error when note is not found', async () => {
+      const getRes = await request(app).get(`/notes/${badNoteId}`);
+      expect(getRes.status).toBe(404);
+    });
   });
 
   describe('PUT /notes/:id', () => {
@@ -74,6 +78,20 @@ describe('UNIT TESTS', () => {
       expect(putRes.status).toBe(200);
       expect(putRes.body.title).toBe(updatedNote.title);
       expect(putRes.body.body).toBe(updatedNote.body);
+    });
+    it('should return an error when note is not found', async () => {
+      const putRes = await request(app).put(`/notes/${badNoteId}`);
+      expect(putRes.status).toBe(404);
+    });
+    it('should return an error if note update fails', async () => {
+      const postRes = await request(app).post('/notes').send(testNote);
+      const noteId = postRes.body._id;
+
+      const putRes = await request(app)
+        .put(`/notes/${noteId}`)
+        .send(updatedBadNote);
+
+      expect(putRes.status).toBe(409);
     });
   });
 
@@ -89,11 +107,17 @@ describe('UNIT TESTS', () => {
     });
 
     it('Should return an error if there is no note to delete', async () => {
-      const noteId = '644a8733053e3ea701f15c97';
-
-      const deleteRes = await request(app).delete(`/notes/${noteId}`);
+      const deleteRes = await request(app).delete(`/notes/${badNoteId}`);
       expect(deleteRes.status).toBe(404);
       expect(deleteRes.body).toBeInstanceOf(Error);
+    });
+  });
+
+  describe('Other', () => {
+    it('should redirect all undefined routes to root', async () => {
+      const res = await request(app).get(`/69`);
+      expect(res.status).toEqual(302);
+      expect(res.headers.location).toEqual('/');
     });
   });
 });
@@ -103,5 +127,18 @@ describe('INTEGRATION TESTS', () => {
     await request(app).post('/notes').send(testNote);
     const res = await request(app).get('/notes');
     expect(res.body[0].title).toBe(testNote.title);
+  });
+  it('should not find deleted note', async () => {
+    const postRes = await request(app).post('/notes').send(testNote);
+    const noteId = postRes.body._id;
+
+    // Delete the created note
+    const deleteRes = await request(app).delete(`/notes/${noteId}`);
+    expect(deleteRes.status).toBe(200);
+    expect(deleteRes.body.title).toBe(testNote.title);
+
+    const getRes = await request(app).get(`/notes/${noteId}`);
+
+    expect(getRes.status).toBe(404);
   });
 });

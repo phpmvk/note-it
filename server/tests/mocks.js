@@ -22,4 +22,13 @@ module.exports = {
     user: 2,
     favorite: true,
   },
+  badNoteId: '644a8733053e3ea701f15c97',
+  badUpdatedNote: {
+    title: 'Updated title',
+    body: 'Updated body',
+    date: 'potato',
+    notebook: 5,
+    user: 'two',
+    favorite: true,
+  },
 };
