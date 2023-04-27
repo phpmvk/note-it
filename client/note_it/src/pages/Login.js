@@ -28,6 +28,7 @@ export const Login = () => {
           ]}
         >
           <Input
+            data-testid='userNameInput'
             prefix={<UserOutlined className='site-form-item-icon' />}
             placeholder='Username'
           />
