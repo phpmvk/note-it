@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const PORT = 3001;
+const { PORT, dbName } = require('./config')
 
 app.use(cors())
   .use(bodyParser.json())
@@ -13,7 +13,7 @@ app.use(cors())
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017');
+    await mongoose.connect('mongodb://127.0.0.1:27017/' + dbName);
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (error) {
     console.error(error);
@@ -23,4 +23,4 @@ const start = async () => {
 
 start();
 
-module.exports(app);
+module.exports = app;
