@@ -13,14 +13,6 @@ const noteSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  notebook: {
-    type: String,
-    required: true,
-  },
-  user: {
-    type: Number,
-    required: true,
-  },
   favorite: {
     type: Boolean,
     required: true,
