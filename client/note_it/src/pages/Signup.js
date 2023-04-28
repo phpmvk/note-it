@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 export const Signup = () => {
   const navigate = useNavigate();
   return (
-    <div className='mt-0'>
+    <div 
+    data-testid='signupDiv'
+    className='mt-0'>
       <div className='flex flex-col items-center min-h-screen pt-6 sm:justify-start sm:pt-0 bg-gray-50'>
         <div className='w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg'>
           <form>

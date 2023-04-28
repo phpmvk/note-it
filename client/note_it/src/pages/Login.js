@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+function Login () {
   const navigate = useNavigate();
   const onFinish = values => {
     console.log('Received values of form: ', values);
@@ -43,6 +43,7 @@ export const Login = () => {
           ]}
         >
           <Input
+            data-testid='userPassword'
             prefix={<LockOutlined className='site-form-item-icon' />}
             type='password'
             placeholder='Password'
@@ -53,13 +54,14 @@ export const Login = () => {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a className='login-form-forgot' href=''>
+          <a className='login-form-forgot' href='/login'>
             Forgot password
           </a>
         </Form.Item>
 
         <Form.Item>
           <Button
+            data-testid='loginButton'
             type='primary'
             htmlType='submit'
             onClick={() => navigate('/home')}
@@ -69,6 +71,7 @@ export const Login = () => {
           </Button>
 
           <Button
+            data-testid='registerButton'
             type='primary'
             htmlType='submit'
             onClick={() => navigate('/signup')}
@@ -81,3 +84,4 @@ export const Login = () => {
     </div>
   );
 };
+export { Login };

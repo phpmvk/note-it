@@ -21,6 +21,7 @@ function App() {
         <NotesProvider>
           <Router>
             <Routes>
+              <Route path='/' element={<Login />} />
               <Route path='/home' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
